@@ -1,5 +1,6 @@
 mod errors;
 mod rules;
+use errors::*;
 
 pub struct Expression<'a> {
     expr: &'a str,
@@ -62,7 +63,9 @@ impl<'a> Expression<'a> {
                 }
 
                 _ => {
-                    if !rules::symbols(c) {
+                    if rules::letter(c) {
+                        return Err(Error::Syntax(SyntaxError::UnallowedStranger))
+                    } else if !rules::symbols(c) {
                         return Err(Error::Syntax(SyntaxError::UnknownSymbol));
                     }
                 }
@@ -77,6 +80,15 @@ impl<'a> Expression<'a> {
     }
 
     pub fn resolve(expr: &str) -> Result<f64, errors::Error> {
+        if expr.len() == 0 { panic!("BITCH WHY EXPR LEN ZERO YOU DONUT !1!1")}
+
+        let mut sectors: Vec<usize> = vec![];
+        let mut priority: rules::Priority = rules::Priority::Number;
+        for (i, c) in expr.chars().enumerate() {
+            match c {
+                _ => ()
+            }
+        }
 
         
         todo!()

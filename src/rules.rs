@@ -1,5 +1,10 @@
-pub const NUMBER_PTY: i32 = 0;
-pub const ADDSUB_PTY: i32 = 0;
+pub enum Priority {
+    Number,
+    Addition,
+    Multiply,
+    Exponant,
+    Parentheses,
+}
 
 pub fn symbols(c: char) -> bool {
     if digit(c) {
@@ -9,10 +14,6 @@ pub fn symbols(c: char) -> bool {
         return true;
     }
     c == ' '
-}
-
-pub fn plusminus(c: char) -> bool {
-    c == '+' || c == '-'
 }
 
 pub fn right_oper(c: char) -> bool {
@@ -28,6 +29,10 @@ pub fn left_oper(c: char) -> bool {
     }
     // [')'].contains(&c)
     c == ')'
+}
+
+pub fn letter(c: char) -> bool {
+    ('a'..='z').contains(&c.to_ascii_lowercase())
 }
 
 pub fn digit(c: char) -> bool {
